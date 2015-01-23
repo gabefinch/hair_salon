@@ -19,14 +19,13 @@ get ('/add_stylist') do
   redirect back
 end
 
-get ('/add_client/:id') do
-  stylist_id = params.fetch('id').to_i()
-  new_client = Client.new({:name => params['name'], :stylist_id => stylist_id })
-  new_client.save()
-  redirect back
-end
-
 get ('/stylist/:id') do
   @stylist = Stylist.find_id(params['id'].to_i())
   erb(:stylist)
+end
+
+get ('/add_client/') do
+  new_client = Client.new({:name => params['client'], :stylist_id => params['stylist_id'].to_i() })
+  new_client.save()
+  redirect back
 end

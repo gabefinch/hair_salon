@@ -8,12 +8,17 @@
   </ul>
 <% end %>
 <br><br>
-<form action="/add_client/<% @stylist.id %>" method="get">
+<form action="/add_client/" method="get">
+  <input id="stylist_id" name="stylist_id" type="hidden" value="<%= @stylist.id() %>">
   <div class="input-group">
     <span class="input-group-addon"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></span>
-    <input type="text" name="name" id="name" class="form-control" placeholder="Add client" aria-describedby="basic-addon1">
+    <input type="text" name="client" id="client" class="form-control" placeholder="Add client for <%= @stylist.name() %>" aria-describedby="basic-addon1">
   </div>
   <br>
-  <button type="submit" class="btn btn-sm btn-primary">Add</button>
+  <button type="submit" class="btn btn-sm btn-primary">Add client</button>
   <button type="reset" class="btn btn-sm btn-danger">Reset</button>
+</form>
+<br>
+<form id="form_id" action="/" method="get">
+  <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Back</button>
 </form>
