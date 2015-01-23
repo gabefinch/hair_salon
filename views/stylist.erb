@@ -1,1 +1,19 @@
-<%= @stylist.name() %>
+<div class="page-header">
+  <h2>Stylist: <%= @stylist.name() %></h2>
+</div>
+<h3>Clients:</h3>
+<% @stylist.clients().each() do |client| %>
+  <ul>
+    <li><h4><%= client.name() %></h4></li>
+  </ul>
+<% end %>
+<br><br>
+<form action="/add_client/<% @stylist.id %>" method="get">
+  <div class="input-group">
+    <span class="input-group-addon"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></span>
+    <input type="text" name="name" id="name" class="form-control" placeholder="Add client" aria-describedby="basic-addon1">
+  </div>
+  <br>
+  <button type="submit" class="btn btn-sm btn-primary">Add</button>
+  <button type="reset" class="btn btn-sm btn-danger">Reset</button>
+</form>
