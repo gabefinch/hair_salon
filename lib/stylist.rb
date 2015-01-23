@@ -24,6 +24,16 @@ class Stylist
     stylists
   end
 
+  define_singleton_method(:find_id) do |id|
+    match = nil
+    Stylist.all().each() do |stylist|
+      if stylist.id() == id
+        match = stylist
+      end
+    end
+    match
+  end
+
   define_method(:save) do
     result = DB.exec("INSERT INTO stylists (name) VALUES ('#{@name}') RETURNING id;")
     @id = result.first().fetch('id').to_i()

@@ -16,6 +16,14 @@ describe(Client) do
     end
   end
 
+  describe('.find_id') do
+    it("returns Client instance corresponding to id arg") do
+      test_client = Client.new({ :name => "Gabe" })
+      test_client.save()
+      expect(Client.find_id(test_client.id())).to(eq(test_client))
+    end
+  end
+
   describe('#save') do
     it("saves client into db") do
       client1 = Client.new({ :name => "Gabe" })

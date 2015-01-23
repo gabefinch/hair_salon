@@ -17,6 +17,14 @@ describe(Stylist) do
     end
   end
 
+  describe('.find_id') do
+    it("returns Stylist instance corresponding to id arg") do
+      test_stylist = Stylist.new({ :name => "Wanda" })
+      test_stylist.save()
+      expect(Stylist.find_id(test_stylist.id())).to(eq(test_stylist))
+    end
+  end
+
   describe('#save') do
     it("saves stylist into db") do
       stylist1 = Stylist.new({ :name => "Wanda" })

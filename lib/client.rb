@@ -27,6 +27,16 @@ class Client
     clients
   end
 
+  define_singleton_method(:find_id) do |id|
+    match = nil
+    Client.all().each() do |client|
+      if client.id() == id
+        match = client
+      end
+    end
+    match
+  end
+
   define_method(:save) do
     result = DB.exec("INSERT INTO clients (name, stylist_id) VALUES ('#{@name}', #{@stylist_id}) RETURNING id;")
     @id = result.first().fetch('id').to_i()
@@ -49,9 +59,11 @@ class Client
 
   define_method(:stylist) do
     returned = DB.exec("SELECT * FROM stylists WHERE id = #{@stylist_id};")
+    if returned != nil
       stylist_name = returned.first().fetch("name")
-      id = returned.first().fetch("id").to_i()
-      Stylist.new({ :name => stylist_name, :id => id })
+      stylist_id = returned.first().fetch("id").to_i()
+      Stylist.new({ :name => stylist_name, :id => stylist_id })
+    end
   end
 
 end
